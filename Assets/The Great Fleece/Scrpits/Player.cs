@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class NewBehaviourScript : MonoBehaviour
+public class Player : MonoBehaviour
 {
+
+    public NavMeshAgent agent;
+    public Camera playerCamera;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,15 +20,17 @@ public class NewBehaviourScript : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Ray rayOrigin = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray rayOrigin = playerCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hitInfo;
 
             if (Physics.Raycast(rayOrigin, out hitInfo))
             {
                 Debug.Log("Hit: " + hitInfo.point);
 
-                GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                cube.transform.position = hitInfo.point;
+                agent.SetDestination(hitInfo.point);
+
+                //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                //cube.transform.position = hitInfo.point;
             }
 
             
