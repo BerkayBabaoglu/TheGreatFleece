@@ -36127,7 +36127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wayPoints: []
-  currentTarget: {fileID: 0}
+  currentTarget: 0
 --- !u!195 &1384902381
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -39853,7 +39853,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wayPoints: []
-  currentTarget: {fileID: 0}
+  currentTarget: 0
 --- !u!195 &1620660136
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -54032,7 +54032,7 @@ MonoBehaviour:
   - {fileID: 562507056}
   - {fileID: 1272872706}
   - {fileID: 945179675}
-  currentTarget: {fileID: 562507056}
+  currentTarget: 0
 --- !u!195 &2088361680
 NavMeshAgent:
   m_ObjectHideFlags: 0
