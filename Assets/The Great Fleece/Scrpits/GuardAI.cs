@@ -6,45 +6,47 @@ using UnityEngine.AI;
 public class GuardAI : MonoBehaviour
 {
     public List<Transform> wayPoints;
-
-    public Transform currentTarget;
-
     private NavMeshAgent _agent;
+    [SerializeField]
+    private int currentTarget;
+    private bool reverse;
 
     // Start is called before the first frame update
     void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
-
-        if(wayPoints.Count > 0)
-        {
-            if (wayPoints[0] != null)
-            {
-                currentTarget = wayPoints[0];
-
-                _agent.SetDestination(currentTarget.position);
-            }
-            
-        }
+        
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(currentTarget != null)
+        if(wayPoints.Count > 0 && wayPoints[currentTarget] != null)
         {
-            float distance = Vector3.Distance(transform.position, currentTarget.position);
-            if(distance < 1.0f)
+            _agent.SetDestination(wayPoints[currentTarget].position);
+
+            float distance = Vector3.Distance(transform.position, wayPoints[currentTarget].position);
+
+            if (distance < 1.0f)
             {
-                if (wayPoints[1] != null && currentTarget != wayPoints[1])
+                if(reverse == true)
                 {
-                    currentTarget = wayPoints[1];
-                    _agent.SetDestination(currentTarget.position);
+                    currentTarget--;
+                    if(currentTarget == 0)
+                    {
+                        reverse = false;
+                        currentTarget = 0;
+                    }
                 }
-                else if (wayPoints[2] != null)
+                else
                 {
-                    currentTarget = wayPoints[2];
-                    _agent.SetDestination(currentTarget.position);
+                    currentTarget++;
+                    if(currentTarget == wayPoints.Count)
+                    {
+                        reverse = true;
+                        currentTarget--;
+                    }
                 }
             }
 
