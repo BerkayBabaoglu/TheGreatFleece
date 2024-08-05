@@ -12,10 +12,14 @@ public class GuardAI : MonoBehaviour
     private bool reverse = false;
     private bool _targetReached;
 
+    private Animator animator;
+    
+
     // Start is called before the first frame update
     void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -31,7 +35,9 @@ public class GuardAI : MonoBehaviour
             {
                 if (currentTarget == 0 || currentTarget == wayPoints.Count - 1)
                 {
+                    
                     _targetReached = true;
+                    animator.SetBool("Walk", false);
                     StartCoroutine(WaitBeforeMoving());
                 }
                 else
@@ -55,6 +61,7 @@ public class GuardAI : MonoBehaviour
         if (reverse)
         {
             currentTarget--;
+            animator.SetBool("Walk", true);
             if (currentTarget <= 0)
             {
                 reverse = false;
@@ -64,6 +71,7 @@ public class GuardAI : MonoBehaviour
         else
         {
             currentTarget++;
+            animator.SetBool("Walk", true);
             if (currentTarget >= wayPoints.Count - 1)
             {
                 reverse = true;
