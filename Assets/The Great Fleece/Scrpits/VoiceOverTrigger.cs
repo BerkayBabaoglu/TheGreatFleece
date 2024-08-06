@@ -1,19 +1,23 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class VoiceOverTrigger : MonoBehaviour
 {
     public AudioClip clipToPlay;
-    private bool hasPlayed = false;
+    private bool hasPlayed = false; // Sesin çalýp çalmadýðýný kontrol etmek için
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if (other.CompareTag("Player") && !hasPlayed)
         {
-            AudioSource.PlayClipAtPoint(clipToPlay, Camera.main.transform.position);
-            hasPlayed = true;
+            StartCoroutine(PlayAudio());
         }
     }
 
+    private IEnumerator PlayAudio()
+    {
+        hasPlayed = true; // Ses çalýndý
+        AudioSource.PlayClipAtPoint(clipToPlay, Camera.main.transform.position);
+        yield return new WaitForSeconds(clipToPlay.length); // Sesin süresince bekle
+    }
 }

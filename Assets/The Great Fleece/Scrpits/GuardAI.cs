@@ -13,7 +13,7 @@ public class GuardAI : MonoBehaviour
     private bool reverse = false;
     private bool _targetReached;
 
-    public bool coinTossed;
+    public bool coinTossed = false;
     public Vector3 coinPos;
 
     private Animator animator;
@@ -39,7 +39,7 @@ public class GuardAI : MonoBehaviour
             {
                 if (currentTarget == 0 || currentTarget == wayPoints.Count - 1)
                 {
-                    
+
                     _targetReached = true;
                     animator.SetBool("Walk", false);
                     StartCoroutine(WaitBeforeMoving());
@@ -54,7 +54,7 @@ public class GuardAI : MonoBehaviour
         {
             float distance = Vector3.Distance(transform.position, coinPos);
 
-            if(distance< 4.0f)
+            if (distance < 4.0f)
             {
                 animator.SetBool("Walk", false);
             }
