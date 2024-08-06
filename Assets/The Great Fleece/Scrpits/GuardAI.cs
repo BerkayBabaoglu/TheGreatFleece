@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,6 +12,9 @@ public class GuardAI : MonoBehaviour
     private int currentTarget;
     private bool reverse = false;
     private bool _targetReached;
+
+    public bool coinTossed;
+    public Vector3 coinPos;
 
     private Animator animator;
     
@@ -25,7 +29,7 @@ public class GuardAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (wayPoints.Count > 0 && wayPoints[currentTarget] != null)
+        if (wayPoints.Count > 0 && wayPoints[currentTarget] != null && coinTossed == false)
         {
             _agent.SetDestination(wayPoints[currentTarget].position);
 
@@ -44,6 +48,15 @@ public class GuardAI : MonoBehaviour
                 {
                     UpdateCurrentTarget();
                 }
+            }
+        }
+        else
+        {
+            float distance = Vector3.Distance(transform.position, coinPos);
+
+            if(distance< 4.0f)
+            {
+                animator.SetBool("Walk", false);
             }
         }
     }

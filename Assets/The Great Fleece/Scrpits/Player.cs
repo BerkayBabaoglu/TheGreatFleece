@@ -11,7 +11,13 @@ public class Player : MonoBehaviour
     private Animator animator;
     public Camera playerCamera;
     private Vector3 _target;
+    public int coinHakki = 1;
 
+    public GameObject coinPrefab;
+    public AudioClip coinSoundEffect;
+
+    public List<NavMeshAgent> guards = new List<NavMeshAgent>();
+    private int coinLimit = 0;
 
 
     // Start is called before the first frame update
@@ -46,5 +52,37 @@ public class Player : MonoBehaviour
             animator.SetBool("Walk", false);
         }
 
+        if (Input.GetMouseButtonDown(1) && coinLimit < coinHakki)
+        {
+            Ray rayOrigin = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hitinfo;
+
+            if(Physics.Raycast(rayOrigin, out hitinfo))
+            {
+
+                animator.SetTrigger("Throw");
+                Instantiate(coinPrefab, hitinfo.point, Quaternion.identity);
+                AudioSource.PlayClipAtPoint(coinSoundEffect, transform.position);
+                coinLimit++;
+                SendCoinToAI(hitinfo.point);
+            }
+        }
+    }
+
+    void SendCoinToAI(Vector3 coinPos)
+    {
+        GameObject[] guards = GameObject.FindGameObjectsWithTag("Guard1");
+        foreach(var guard in guards)
+        {
+            NavMeshAgent currentAgent = guard.GetComponent<NavMeshAgent>();
+            GuardAI currentGuard = guard.GetComponent<GuardAI>();
+            Animator currentAnimator = guard.GetComponent<Animator>();
+
+            currentGuard.coinTossed = true;
+            currentAgent.SetDestination(coinPos);
+            currentAnimator.SetBool("Walk", true);
+            currentGuard.coinPos = coinPos;
+            
+        }
     }
 }
