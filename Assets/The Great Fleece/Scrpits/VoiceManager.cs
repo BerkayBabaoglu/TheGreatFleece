@@ -9,9 +9,9 @@ public class VoiceManager : MonoBehaviour
     {
         get
         {
-            if(_instance == null)
+            if (_instance == null)
             {
-                Debug.LogError("Audio Manager is null!");
+                Debug.LogError("Voice Manager is null!");
             }
             return _instance;
         }
@@ -19,6 +19,7 @@ public class VoiceManager : MonoBehaviour
 
     public AudioSource voiceSource;
     public AudioSource music;
+    private HashSet<AudioClip> playedClips = new HashSet<AudioClip>(); // Çalýnan ses dosyalarýný tutan set
 
     private void Awake()
     {
@@ -27,13 +28,18 @@ public class VoiceManager : MonoBehaviour
 
     public void PlayVoiceOver(AudioClip clipToPlay)
     {
-        voiceSource.clip = clipToPlay;
-        voiceSource.Play();
+        if (!playedClips.Contains(clipToPlay))
+        {
+            voiceSource.loop = false; // Ses dosyasýnýn bir kere çalýnmasýný saðla
+            voiceSource.clip = clipToPlay;
+            voiceSource.Play();
+            playedClips.Add(clipToPlay); // Çalýnan ses dosyasýný sete ekle
+        }
     }
-    
 
-    public void playMusic()
+    public void PlayMusic()
     {
+        music.loop = true; // Ambiyans müziðin loop yapmasýný saðla
         music.Play();
     }
 }

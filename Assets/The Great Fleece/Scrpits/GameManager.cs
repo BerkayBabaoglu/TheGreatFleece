@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S))
         {
             introCutscene.time = 58.90f;
-            VoiceManager.Instance.playMusic();
+            VoiceManager.Instance.PlayMusic();
         }
     }
 }
