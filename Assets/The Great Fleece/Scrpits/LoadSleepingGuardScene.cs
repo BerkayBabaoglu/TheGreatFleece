@@ -15,10 +15,7 @@ public class LoadSleepingGuardScene : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             sleepingguardScene.SetActive(true);
+
         }
     }
-
-    
-
-
 }

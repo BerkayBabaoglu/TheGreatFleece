@@ -57,7 +57,7 @@ public class Player : MonoBehaviour
             Ray rayOrigin = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hitinfo;
 
-            if(Physics.Raycast(rayOrigin, out hitinfo))
+            if (Physics.Raycast(rayOrigin, out hitinfo))
             {
 
                 animator.SetTrigger("Throw");
@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
     void SendCoinToAI(Vector3 coinPos)
     {
         GameObject[] guards = GameObject.FindGameObjectsWithTag("Guard1");
-        foreach(var guard in guards)
+        foreach (var guard in guards)
         {
             NavMeshAgent currentAgent = guard.GetComponent<NavMeshAgent>();
             GuardAI currentGuard = guard.GetComponent<GuardAI>();
@@ -82,7 +82,14 @@ public class Player : MonoBehaviour
             currentAgent.SetDestination(coinPos);
             currentAnimator.SetBool("Walk", true);
             currentGuard.coinPos = coinPos;
-            
+
         }
     }
 }
+
+
+
+//public static class Actions
+//{
+//    public static Action<Transform> OnCoinTossed;
+//}
