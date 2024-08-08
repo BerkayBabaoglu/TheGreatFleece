@@ -10,14 +10,13 @@ public class GuardAI : MonoBehaviour
     private NavMeshAgent _agent;
     [SerializeField]
     private int currentTarget;
-    private bool reverse;
+    private bool reverse = false;
     private bool _targetReached;
 
-    public bool coinTossed = false;
+    public bool coinTossed;
     public Vector3 coinPos;
 
     private Animator animator;
-
 
     // Start is called before the first frame update
     void Start()
@@ -35,26 +34,25 @@ public class GuardAI : MonoBehaviour
 
             float distance = Vector3.Distance(transform.position, wayPoints[currentTarget].position);
 
-            if (distance < 1.0f && !_targetReached)
+            if (distance < 1.0f && (currentTarget == 0 || currentTarget == wayPoints.Count - 1))
             {
-                    if(currentTarget == 0)
-                    {
-                        _targetReached = true;
-                        reverse = true;
-                        animator.SetBool("Walk", false);
-                        StartCoroutine(WaitBeforeMoving());
-                    }
-                    else if(currentTarget == wayPoints.Count - 1)
-                    {
-                        _targetReached = true;
-                        reverse = true;
-                        animator.SetBool("Walk", false);
-                        StartCoroutine(WaitBeforeMoving());
-                    }else
-                    {
-                        reverse = false;
-                        UpdateCurrentTarget();
-                    }
+                if (animator != null)
+                {
+                    animator.SetBool("Walk", false);
+                }
+            }
+            else
+            {
+                if (animator != null)
+                {
+                    animator.SetBool("Walk", true);
+                }
+            }
+
+            if (distance < 1.0f && _targetReached == false)
+            {
+                _targetReached = true;
+                StartCoroutine(WaitBeforeMoving());
             }
         }
         else
@@ -71,33 +69,31 @@ public class GuardAI : MonoBehaviour
     IEnumerator WaitBeforeMoving()
     {
         yield return new WaitForSeconds(2f);
-
         UpdateCurrentTarget();
         _targetReached = false;
     }
 
     private void UpdateCurrentTarget()
     {
-        if (reverse==true && currentTarget == 0)
-        {
-            currentTarget++;
-            animator.SetBool("Walk", true);
-        }
-        else if(reverse==true && currentTarget == wayPoints.Count - 1)
+        if (reverse)
         {
             currentTarget--;
-            animator.SetBool("Walk", true);
+            if (currentTarget <= 0)
+            {
+                reverse = false;
+                currentTarget = 0;
+            }
         }
-        else if(reverse == false  && currentTarget == 0)
+        else
         {
             currentTarget++;
-            animator.SetBool("Walk", true);
+            if (currentTarget >= wayPoints.Count - 1)
+            {
+                reverse = true;
+                currentTarget = wayPoints.Count - 1;
+            }
         }
-        else if(reverse == false && currentTarget == wayPoints.Count - 1)
-        {
-            currentTarget--;
-            animator.SetBool("Walk", true);
-        }
-        
     }
 }
+
+
