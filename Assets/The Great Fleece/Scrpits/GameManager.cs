@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
         else
         {
             introCutscene.time = 59.0f;
-            //bu konumda
+            
         }
     }
 
