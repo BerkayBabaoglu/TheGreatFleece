@@ -5,6 +5,7 @@ using UnityEngine;
 public class GrabKeyCardActivation : MonoBehaviour
 {
     public GameObject sleepingGuardCutScene;
+    
 
     private void OnTriggerEnter(Collider other)
     {

@@ -17,7 +17,7 @@ public class CameraTrigger : MonoBehaviour
         if (other.tag == "Player")
         {
 
-            foreach(var cam in cameras)
+            foreach (var cam in cameras)
             {
                 cam.Priority = 9;
             }

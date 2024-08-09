@@ -462,7 +462,7 @@ MonoBehaviour:
   m_ScreenX: 0.5
   m_ScreenY: 0.5
   m_DeadZoneWidth: 0.1
-  m_DeadZoneHeight: 0.1
+  m_DeadZoneHeight: 0.1310345
   m_SoftZoneWidth: 0.8
   m_SoftZoneHeight: 0.8
   m_BiasX: 0
@@ -10525,7 +10525,7 @@ MonoBehaviour:
   m_ExcludedPropertiesInInspector:
   - m_Script
   m_LockStageInInspector: 
-  m_Priority: 10
+  m_Priority: 11
   m_LookAt: {fileID: 431766541}
   m_Follow: {fileID: 0}
   m_Lens:
@@ -30433,7 +30433,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 973923960}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.21560417, y: -0.19060443, z: 0.042953536, w: 0.95673394}
+  m_LocalRotation: {x: 0.2156134, y: -0.19039842, z: 0.04290711, w: 0.95677495}
   m_LocalPosition: {x: 3.886889, y: 11.713846, z: -19.13753}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -56578,8 +56578,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2043896029}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.21560417, y: -0.19060443, z: 0.042953536, w: 0.95673394}
-  m_LocalPosition: {x: 5.6666756, y: 16.629623, z: 0.39009094}
+  m_LocalRotation: {x: 0.15713675, y: 0.038643416, z: -0.0061535197, w: 0.9868013}
+  m_LocalPosition: {x: -13.093544, y: 22.439875, z: -35.84944}
   m_LocalScale: {x: 0.95321447, y: 1.0054615, z: 0.9648317}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -57377,6 +57377,7 @@ MonoBehaviour:
   player: {fileID: 431766536}
   sleepingGuard: {fileID: 1361990653}
   trigger: {fileID: 2073984742}
+  keyCard: {fileID: 1994932250}
 --- !u!54 &2073984748
 Rigidbody:
   m_ObjectHideFlags: 0
