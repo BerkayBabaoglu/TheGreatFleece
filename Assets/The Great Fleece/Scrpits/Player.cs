@@ -37,6 +37,8 @@ public class Player : MonoBehaviour
 
             if (Physics.Raycast(rayOrigin, out hitInfo))
             {
+                
+
                 agent.SetDestination(hitInfo.point);
                 animator.SetBool("Walk", true);
                 _target = hitInfo.point;
@@ -47,7 +49,7 @@ public class Player : MonoBehaviour
 
         float distance = Vector3.Distance(transform.position, _target);
 
-        if (distance < 1.0f)
+        if (distance < 2.0f)
         {
             animator.SetBool("Walk", false);
         }
@@ -87,9 +89,3 @@ public class Player : MonoBehaviour
     }
 }
 
-
-
-//public static class Actions
-//{
-//    public static Action<Transform> OnCoinTossed;
-//}
